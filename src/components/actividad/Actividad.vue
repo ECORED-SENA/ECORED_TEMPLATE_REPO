@@ -28,7 +28,7 @@
       :pregunta-index="preguntaSelectedIdx"
       :preguntas-count="preguntas.length"
       :respuestas-length="respuestas.length"
-      :continuar-disabled="!respuestaActual.id"
+      :continuar-disabled="continuarDisabled"
       class="mx-4 mx-md-5"
       @continuar="onContinuar"
       @reiniciar="onReiniciar"
@@ -62,6 +62,7 @@ export default {
     preguntaSelectedIdx: 0,
     respuestaActual: {},
     respuestas: [],
+    continuarDisabled: true,
   }),
   computed: {
     preguntas() {
@@ -81,9 +82,9 @@ export default {
     preguntaSelected() {
       return this.preguntas[this.preguntaSelectedIdx]
     },
-    continuarDisabled() {
-      return !this.respuestas.some(r => r.id === this.preguntaSelected.id)
-    },
+    // continuarDisabled() {
+    //   return !this.respuestas.some(r => r.id === this.preguntaSelected.id)
+    // },
   },
   methods: {
     shuffle(array) {
@@ -103,12 +104,14 @@ export default {
       return array
     },
     onRrespuestaSelected(respuestaEsCorrecta) {
+      this.continuarDisabled = false
       this.respuestaActual = {
         id: this.preguntaSelected.id,
         esCorrecta: respuestaEsCorrecta,
       }
     },
     onContinuar() {
+      this.continuarDisabled = true
       if (this.respuestaActual.id) {
         const idx = this.respuestas.findIndex(
           r => r.id === this.preguntaSelected.id,
