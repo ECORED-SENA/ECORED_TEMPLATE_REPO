@@ -15,23 +15,48 @@ export default {
   components: { Actividad },
   data: () => ({
     cuestionario: {
-      tema: 'Manejo de los residuos sólidos en la producción avícola.',
+      tema: 'Nombre del componente formativo',
       titulo: 'Cuestionario',
       introduccion:
-        'Lea cada enunciado y luego seleccione la respuesta correcta según corresponda.',
+        'Esta actividad le permitirá determinar el grado de apropiación de los contenidos del componente formativo. Lea cada enunciado y luego seleccione la respuesta correcta según corresponda.',
       barajarPreguntas: false,
       preguntas: [
         {
           id: 1,
-          texto:
-            'Cuáles son los tipos de explotación en los sistemas productivos avícolas:',
+          texto: 'Texto pregunta 1 con <strong>Negrita</strong> <em>Itálica</.',
           imagen: require('@/assets/componentes/pregunta_1.svg'),
           barajarRespuestas: true,
           opciones: [
-            { id: 'a', texto: '', esCorrecta: true },
-            { id: 'b', texto: '', esCorrecta: false },
-            { id: 'c', texto: '', esCorrecta: false },
-            { id: 'd', texto: '', esCorrecta: false },
+            { id: 'a', texto: 'Opción 1', esCorrecta: true },
+            { id: 'b', texto: 'Opción 2', esCorrecta: false },
+            { id: 'c', texto: 'Opción 3', esCorrecta: false },
+            { id: 'd', texto: 'Opción 4', esCorrecta: false },
+          ],
+          mensaje_correcto: '¡Muy bien! Ha acertado la respuesta.',
+          mensaje_incorrecto: 'Lo sentimos, su respuesta no es la correcta.',
+        },
+        {
+          id: 2,
+          texto: 'Texto pregunta 2',
+          imagen: require('@/assets/componentes/pregunta_1.svg'),
+          barajarRespuestas: true,
+          opciones: [
+            { id: 'a', texto: 'Falso', esCorrecta: true },
+            { id: 'b', texto: 'Verdadero', esCorrecta: false },
+          ],
+          mensaje_correcto: '¡Muy bien! Ha acertado la respuesta.',
+          mensaje_incorrecto: 'Lo sentimos, su respuesta no es la correcta.',
+        },
+        {
+          id: 3,
+          texto: 'Texto pregunta 3',
+          imagen: require('@/assets/componentes/pregunta_1.svg'),
+          barajarRespuestas: false,
+          opciones: [
+            { id: 'a', texto: 'Opción 1', esCorrecta: true },
+            { id: 'b', texto: 'Opción 2', esCorrecta: false },
+            { id: 'c', texto: 'Opción 3', esCorrecta: false },
+            { id: 'd', texto: 'Todas las anteriores', esCorrecta: false },
           ],
           mensaje_correcto: '¡Muy bien! Ha acertado la respuesta.',
           mensaje_incorrecto: 'Lo sentimos, su respuesta no es la correcta.',
