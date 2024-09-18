@@ -38,7 +38,7 @@ export default {
         {
           id: 2,
           texto: 'Texto pregunta 2',
-          imagen: require('@/assets/componentes/pregunta_1.svg'),
+          imagen: require('@/assets/componentes/pregunta_2.png'),
           barajarRespuestas: true,
           opciones: [
             { id: 'a', texto: 'Falso', esCorrecta: true },
@@ -50,7 +50,7 @@ export default {
         {
           id: 3,
           texto: 'Texto pregunta 3',
-          imagen: require('@/assets/componentes/pregunta_1.svg'),
+          imagen: require('@/assets/componentes/pregunta_3.png'),
           barajarRespuestas: false,
           opciones: [
             { id: 'a', texto: 'Opción 1', esCorrecta: true },
