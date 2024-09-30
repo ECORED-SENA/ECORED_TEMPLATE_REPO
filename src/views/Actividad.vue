@@ -22,11 +22,16 @@ export default {
       preguntas: [
         {
           id: 1,
-          texto: 'Texto pregunta 1 con <strong>Negrita</strong> <em>Itálica</.',
+          texto:
+            'Texto pregunta 1 con <strong>Negrita</strong> <em>Itálica</em>.',
           imagen: require('@/assets/componentes/pregunta_1.svg'),
           barajarRespuestas: true,
           opciones: [
-            { id: 'a', texto: 'Opción 1', esCorrecta: true },
+            {
+              id: 'a',
+              texto: '<strong>Negrita</strong> <em>Itálica</em>',
+              esCorrecta: true,
+            },
             { id: 'b', texto: 'Opción 2', esCorrecta: false },
             { id: 'c', texto: 'Opción 3', esCorrecta: false },
             { id: 'd', texto: 'Opción 4', esCorrecta: false },
