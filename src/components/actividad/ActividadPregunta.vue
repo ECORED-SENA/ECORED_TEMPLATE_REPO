@@ -1,6 +1,8 @@
 <template>
   <div>
-    <p class="mb-4 pb-4" v-html="pregunta.texto"></p>
+    <p class="mb-4 pb-4">
+      <strong v-html="pregunta.texto"></strong>
+    </p>
     <div class="row align-items-center">
       <div class="d-none d-md-block col-5">
         <img :src="pregunta.imagen" alt="" />

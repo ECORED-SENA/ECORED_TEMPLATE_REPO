@@ -27,6 +27,7 @@
       :preguntas-count="preguntas.length"
       :respuestas-length="respuestas.length"
       :continuar-disabled="continuarDisabled"
+      :respuestas="respuestas"
       class="mx-4 mx-md-5"
       @continuar="onContinuar"
       @reiniciar="onReiniciar"
