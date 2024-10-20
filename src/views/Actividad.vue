@@ -4,7 +4,7 @@
   .container.tarjeta.tarjeta--blanca.p-4.p-md-5
 
     #Actividad                
-      <Actividad :cuestionario="{ ...cuestionario, preguntas: preguntasAleatorias }" @reiniciar="reiniciarActividad" />
+      <Actividad :cuestionario="{ ...cuestionario, preguntas: preguntasAleatorias, totalPreguntasBase: totalPreguntasOriginales }" @reiniciar="reiniciarActividad" />
 
 </template>
 
@@ -16,6 +16,7 @@ export default {
   data: () => ({
     preguntasAleatorias: [],
     preguntasUsadas: new Set(),
+    totalPreguntasOriginales: 0,
     cuestionario: {
       tema: 'Nombre del componente formativo',
       titulo: 'Cuestionario',
@@ -314,16 +315,12 @@ export default {
     },
   }),
   computed: {},
-  mounted() {
-    console.log('Componente montado, preguntas iniciales seleccionadas')
-  },
   created() {
-    console.log('Hook created se está ejecutando')
+    this.totalPreguntasOriginales = this.cuestionario.preguntas.length
     this.seleccionarPreguntasAleatorias()
   },
   methods: {
     seleccionarPreguntasAleatorias() {
-      console.log('Método seleccionarPreguntasAleatorias se está ejecutando')
       const preguntas = this.cuestionario.preguntas
       const totalPreguntas = preguntas.length
       const cantidadASeleccionar = Math.min(totalPreguntas, 10)
@@ -350,10 +347,6 @@ export default {
       }
 
       this.preguntasAleatorias = this.shuffle(preguntasSeleccionadas)
-      console.log(
-        'Preguntas seleccionadas:',
-        this.preguntasAleatorias.map(p => p.id),
-      )
     },
     shuffle(array) {
       for (let i = array.length - 1; i > 0; i--) {
@@ -363,7 +356,6 @@ export default {
       return array
     },
     reiniciarActividad() {
-      console.log('Método reiniciarActividad se está ejecutando')
       this.seleccionarPreguntasAleatorias()
       this.$forceUpdate()
     },

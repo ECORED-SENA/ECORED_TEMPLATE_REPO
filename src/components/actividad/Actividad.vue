@@ -11,8 +11,11 @@
         <p class="mb-0" v-html="cuestionario.introduccion"></p>
       </div>
     </div>
-    <div class="tarjeta tarjeta--lightest-gray px-4 pb-4 px-md-5">
-      <div class="d-flex justify-content-end mt-4">
+    <div class="tarjeta tarjeta--lightest-gray px-4 pb-4 pt-4 px-md-5">
+      <div
+        v-if="respuestas.length !== preguntas.length"
+        class="d-flex justify-content-end"
+      >
         <div class="form-check form-switch">
           <input
             id="switchCheckAudio"
@@ -30,7 +33,7 @@
         :mensaje-reprobado="cuestionario.mensaje_final_reprobado"
         :porcentaje-aprobadas="porcentajeAprobadas"
         :preguntas-count="preguntas.length"
-        :total-preguntas-originales="cuestionario.preguntas.length"
+        :total-preguntas-base="cuestionario.totalPreguntasBase"
         @reiniciar="onReiniciar"
       />
       <ActividadPregunta
@@ -86,6 +89,7 @@ export default {
     respuestas: [],
     continuarDisabled: true,
     audioEnabled: true,
+    totalPreguntasOriginales: 0,
   }),
   computed: {
     preguntas() {

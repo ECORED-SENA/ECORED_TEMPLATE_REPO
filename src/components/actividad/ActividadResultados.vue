@@ -73,7 +73,7 @@
           <span>Volver a intentarlo</span>
         </button>-->
         <button
-          v-if="totalPreguntasOriginales > preguntasCount"
+          v-if="totalPreguntasBase > preguntasCount"
           class="boton btn-lg boton--b py-3 px-5 mt-3"
           @click="$emit('reiniciar')"
         >
@@ -105,7 +105,7 @@ export default {
       type: Number,
       required: true,
     },
-    totalPreguntasOriginales: {
+    totalPreguntasBase: {
       type: Number,
       required: true,
     },
