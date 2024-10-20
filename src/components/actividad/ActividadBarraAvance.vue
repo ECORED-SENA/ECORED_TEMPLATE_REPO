@@ -12,17 +12,6 @@
         </span>
       </div>
       <div class="col-auto">
-        <!--<button
-          v-if="
-            rtas.correctas !== preguntasCount &&
-              respuestasLength === preguntasCount
-          "
-          class="boton btn-lg boton--b py-3 px-5"
-          @click="$emit('reiniciar')"
-        >
-          <span>Volver a intentarlo</span>
-        </button>
-        <div v-else-if="rtas.correctas === preguntasCount" class="py-4"></div>-->
         <div v-if="respuestasLength === preguntasCount" class="py-4"></div>
         <button
           v-else-if="respuestasLength === 9"

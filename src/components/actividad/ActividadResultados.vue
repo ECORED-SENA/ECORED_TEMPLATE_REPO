@@ -64,14 +64,6 @@
         </template>
         <hr class="w-100" />
         <p class="mb-0">Aciertos: {{ rtas.correctas }} / {{ rtas.total }}</p>
-
-        <!--<button
-          v-if="!aprobado"
-          class="boton btn-lg boton--b py-3 px-5 mt-3"
-          @click="$emit('reiniciar')"
-        >
-          <span>Volver a intentarlo</span>
-        </button>-->
         <button
           v-if="totalPreguntasBase > preguntasCount"
           class="boton btn-lg boton--b py-3 px-5 mt-3"
@@ -146,7 +138,7 @@ export default {
   },
   methods: {
     animateProgress() {
-      const duration = 1500 // 1.5 segundos
+      const duration = 1500
       const start = performance.now()
 
       const animate = time => {

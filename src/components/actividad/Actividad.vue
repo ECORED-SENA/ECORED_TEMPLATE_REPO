@@ -114,20 +114,14 @@ export default {
       const aprobadas = this.respuestas.filter(r => r.esCorrecta).length
       return Math.round((aprobadas / this.respuestas.length) * 100)
     },
-    // continuarDisabled() {
-    //   return !this.respuestas.some(r => r.id === this.preguntaSelected.id)
-    // },
   },
   methods: {
     shuffle(array) {
       let currentIndex = array.length
       let randomIndex
-      // While there remain elements to shuffle.
       while (currentIndex > 0) {
-        // Pick a remaining element.
         randomIndex = Math.floor(Math.random() * currentIndex)
         currentIndex--
-        // And swap it with the current element.
         ;[array[currentIndex], array[randomIndex]] = [
           array[randomIndex],
           array[currentIndex],
@@ -187,7 +181,6 @@ export default {
       const porcentajeAprobacion = (respuestasCorrectas / totalPreguntas) * 100
 
       if (porcentajeAprobacion >= 70) {
-        // Asumiendo que 70% es el umbral de aprobación
         this.reproducirSonido(endGameSuccessSound)
       } else {
         this.reproducirSonido(endGameFailSound)
@@ -203,6 +196,5 @@ export default {
   pointer-events: none
 
 .tarjeta--lightest-gray
-  //background: #eaeff3
   border: 3px solid #dce4eb
 </style>
