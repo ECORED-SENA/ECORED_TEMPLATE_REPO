@@ -15,6 +15,8 @@
       <ActividadResultados
         v-if="respuestas.length === preguntas.length"
         :respuestas="respuestas"
+        :mensaje-aprobado="cuestionario.mensaje_final_aprobado"
+        :mensaje-reprobado="cuestionario.mensaje_final_reprobado"
       />
       <ActividadPregunta
         v-else
@@ -36,6 +38,11 @@
 </template>
 
 <script>
+import screenChangeSound from '@/assets/actividad/audio/screen-change.mp3'
+import successSound from '@/assets/actividad/audio/success.mp3'
+import failSound from '@/assets/actividad/audio/fail.mp3'
+import endGameSuccessSound from '@/assets/actividad/audio/end-game-success.mp3'
+import endGameFailSound from '@/assets/actividad/audio/end-game-fail.mp3'
 import ActividadPregunta from './ActividadPregunta'
 import ActividadBarraAvance from './ActividadBarraAvance'
 import ActividadResultados from './ActividadResultados'
@@ -108,6 +115,11 @@ export default {
         id: this.preguntaSelected.id,
         esCorrecta: respuestaEsCorrecta,
       }
+      if (respuestaEsCorrecta) {
+        this.reproducirSonido(successSound)
+      } else {
+        this.reproducirSonido(failSound)
+      }
     },
     onContinuar() {
       this.continuarDisabled = true
@@ -124,6 +136,9 @@ export default {
 
       if (this.preguntaSelectedIdx < this.preguntas.length - 1) {
         this.preguntaSelectedIdx += 1
+        this.reproducirSonido(screenChangeSound)
+      } else {
+        this.finalizarPrueba()
       }
     },
     onReiniciar() {
@@ -131,6 +146,24 @@ export default {
       this.respuestas = []
       this.respuestaActual = {}
       this.intentos += 1
+      this.$emit('reiniciar')
+    },
+    reproducirSonido(audioSrc) {
+      const audio = new Audio(audioSrc)
+      audio.play()
+    },
+    finalizarPrueba() {
+      const totalPreguntas = this.preguntas.length
+      const respuestasCorrectas = this.respuestas.filter(r => r.esCorrecta)
+        .length
+      const porcentajeAprobacion = (respuestasCorrectas / totalPreguntas) * 100
+
+      if (porcentajeAprobacion >= 70) {
+        // Asumiendo que 70% es el umbral de aprobación
+        this.reproducirSonido(endGameSuccessSound)
+      } else {
+        this.reproducirSonido(endGameFailSound)
+      }
     },
   },
 }
