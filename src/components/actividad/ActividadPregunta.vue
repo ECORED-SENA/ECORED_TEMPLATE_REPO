@@ -42,11 +42,11 @@
     </div>
     <template v-if="respuestaSelected.id">
       <hr />
-      <div v-if="respuestaSelected.esCorrecta" class="pt-2">
+      <div v-if="respuestaSelected.esCorrecta" class="pt-1">
         <span class="text-success h3 ma-0">¡Correcto!</span>
         {{ pregunta.mensaje_correcto }}
       </div>
-      <div v-else class="pt-2">
+      <div v-else class="pt-1">
         <span class="text-danger h3 ma-0">¡Incorrecto!</span>
         {{ pregunta.mensaje_incorrecto }}
       </div>

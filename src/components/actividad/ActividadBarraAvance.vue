@@ -7,10 +7,12 @@
         </div>
       </div>
       <div class="col col-md-auto text-center">
-        Pregunta {{ preguntaIndex + 1 }} de {{ preguntasCount }}
+        <span class="lh-1">
+          Pregunta {{ preguntaIndex + 1 }} de {{ preguntasCount }}
+        </span>
       </div>
       <div class="col-auto">
-        <button
+        <!--<button
           v-if="
             rtas.correctas !== preguntasCount &&
               respuestasLength === preguntasCount
@@ -20,7 +22,8 @@
         >
           <span>Volver a intentarlo</span>
         </button>
-        <div v-else-if="rtas.correctas === preguntasCount" class="py-4"></div>
+        <div v-else-if="rtas.correctas === preguntasCount" class="py-4"></div>-->
+        <div v-if="respuestasLength === preguntasCount" class="py-4"></div>
         <button
           v-else-if="respuestasLength === 9"
           class="boton btn-lg boton--b py-3 px-4"
@@ -100,6 +103,9 @@ export default {
   border-bottom-right-radius: 10px
   border-bottom-left-radius: 10px
   overflow: hidden
+  @media (max-width: 560px)
+    padding-left: .85rem !important
+
   .boton
     border-radius: 0
 

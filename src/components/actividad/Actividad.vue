@@ -11,12 +11,27 @@
         <p class="mb-0" v-html="cuestionario.introduccion"></p>
       </div>
     </div>
-    <div class="tarjeta tarjeta--lightest-gray p-4 p-md-5">
+    <div class="tarjeta tarjeta--lightest-gray px-4 pb-4 px-md-5">
+      <div class="d-flex justify-content-end mt-4">
+        <div class="form-check form-switch">
+          <input
+            id="switchCheckAudio"
+            v-model="audioEnabled"
+            class="form-check-input"
+            type="checkbox"
+          />
+          <label class="form-check-label" for="switchCheckAudio">¿Audio?</label>
+        </div>
+      </div>
       <ActividadResultados
         v-if="respuestas.length === preguntas.length"
         :respuestas="respuestas"
         :mensaje-aprobado="cuestionario.mensaje_final_aprobado"
         :mensaje-reprobado="cuestionario.mensaje_final_reprobado"
+        :porcentaje-aprobadas="porcentajeAprobadas"
+        :preguntas-count="preguntas.length"
+        :total-preguntas-originales="cuestionario.preguntas.length"
+        @reiniciar="onReiniciar"
       />
       <ActividadPregunta
         v-else
@@ -70,6 +85,7 @@ export default {
     respuestaActual: {},
     respuestas: [],
     continuarDisabled: true,
+    audioEnabled: true,
   }),
   computed: {
     preguntas() {
@@ -88,6 +104,11 @@ export default {
     },
     preguntaSelected() {
       return this.preguntas[this.preguntaSelectedIdx]
+    },
+    porcentajeAprobadas() {
+      if (this.respuestas.length === 0) return 0
+      const aprobadas = this.respuestas.filter(r => r.esCorrecta).length
+      return Math.round((aprobadas / this.respuestas.length) * 100)
     },
     // continuarDisabled() {
     //   return !this.respuestas.some(r => r.id === this.preguntaSelected.id)
@@ -150,8 +171,10 @@ export default {
       this.$emit('reiniciar')
     },
     reproducirSonido(audioSrc) {
-      const audio = new Audio(audioSrc)
-      audio.play()
+      if (this.audioEnabled) {
+        const audio = new Audio(audioSrc)
+        audio.play()
+      }
     },
     finalizarPrueba() {
       const totalPreguntas = this.preguntas.length
