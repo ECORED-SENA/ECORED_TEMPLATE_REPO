@@ -21,6 +21,7 @@
       <ActividadPregunta
         v-else
         :pregunta="preguntaSelected"
+        :numero-pregunta="preguntaSelectedIdx + 1"
         @respuestaSelected="onRrespuestaSelected"
       />
     </div>

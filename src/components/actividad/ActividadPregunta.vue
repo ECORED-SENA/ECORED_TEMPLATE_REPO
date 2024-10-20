@@ -1,8 +1,10 @@
 <template>
   <div>
-    <p class="mb-4 pb-4">
-      <strong v-html="pregunta.texto"></strong>
-    </p>
+    <h3 class="mb-4 pb-4">
+      <strong
+        >{{ numeroPregunta }}. <span v-html="pregunta.texto"></span
+      ></strong>
+    </h3>
     <div class="row align-items-center">
       <div class="d-none d-md-block col-5">
         <img :src="pregunta.imagen" alt="" />
@@ -58,6 +60,10 @@ export default {
   props: {
     pregunta: {
       type: Object,
+      required: true,
+    },
+    numeroPregunta: {
+      type: Number,
       required: true,
     },
   },
