@@ -1,22 +1,17 @@
 <template lang="pug">
-.curso-main-container.pb-3
-  BannerInterno(icono="far fa-question-circle" titulo="Actividad didáctica")
-  .container.tarjeta.tarjeta--blanca.p-4.p-md-5
-
-    #Actividad                
-      <Actividad :cuestionario="{ ...cuestionario, preguntas: preguntasAleatorias, totalPreguntasBase: totalPreguntasOriginales }" @reiniciar="reiniciarActividad" />
-
-</template>
+  .curso-main-container.pb-3
+    BannerInterno(icono="far fa-question-circle" titulo="Actividad didáctica")
+    .container.tarjeta.tarjeta--blanca.p-4.p-md-5
+  
+      #Actividad                
+        <Actividad :cuestionario="cuestionario"/>
+  
+  </template>
 
 <script>
-import Actividad from '@/components/actividad/Actividad'
 export default {
   name: 'ActividadDidactica',
-  components: { Actividad },
   data: () => ({
-    preguntasAleatorias: [],
-    preguntasUsadas: new Set(),
-    totalPreguntasOriginales: 0,
     cuestionario: {
       tema: 'Nombre del componente formativo',
       titulo: 'Cuestionario',
@@ -314,51 +309,5 @@ export default {
         'Le recomendamos volver a revisar el componente formativo e intentar nuevamente la actividad didáctica.',
     },
   }),
-  computed: {},
-  created() {
-    this.totalPreguntasOriginales = this.cuestionario.preguntas.length
-    this.seleccionarPreguntasAleatorias()
-  },
-  methods: {
-    seleccionarPreguntasAleatorias() {
-      const preguntas = this.cuestionario.preguntas
-      const totalPreguntas = preguntas.length
-      const cantidadASeleccionar = Math.min(totalPreguntas, 10)
-
-      if (this.preguntasUsadas.size >= totalPreguntas - cantidadASeleccionar) {
-        this.preguntasUsadas.clear()
-      }
-
-      let preguntasDisponibles = preguntas.filter(
-        p => !this.preguntasUsadas.has(p.id),
-      )
-      let preguntasSeleccionadas = []
-
-      while (preguntasSeleccionadas.length < cantidadASeleccionar) {
-        if (preguntasDisponibles.length === 0) {
-          preguntasDisponibles = preguntas.filter(
-            p => !preguntasSeleccionadas.includes(p),
-          )
-        }
-        const index = Math.floor(Math.random() * preguntasDisponibles.length)
-        const pregunta = preguntasDisponibles.splice(index, 1)[0]
-        preguntasSeleccionadas.push(pregunta)
-        this.preguntasUsadas.add(pregunta.id)
-      }
-
-      this.preguntasAleatorias = this.shuffle(preguntasSeleccionadas)
-    },
-    shuffle(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1))
-        ;[array[i], array[j]] = [array[j], array[i]]
-      }
-      return array
-    },
-    reiniciarActividad() {
-      this.seleccionarPreguntasAleatorias()
-      this.$forceUpdate()
-    },
-  },
 }
 </script>
